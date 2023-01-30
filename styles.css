@@ -1,3 +1,11 @@
+body{
+  background-color:lightblue;
+}
+h1{
+  color: black;
+  text-decoration: underline;
+  text-align: center;
+}
 input[type=text],textarea{
     width: 100%;
     padding: 12px;
@@ -33,6 +41,7 @@ input[type=text],textarea{
   label{
       padding: 3px 3px 3px 0;
       display: inline-block;
+      font-weight: 700;
       font-family: Arial, Helvetica, sans-serif;
   }
   .container {
@@ -62,7 +71,7 @@ input[type=text],textarea{
       }
     }
   #btnSubmit{
-    background-color: #4CAF50; /* Green */
+    background-color:rgb(4, 4, 252); /* Green */
     border: none;
     color: white;
     padding: 15px 32px;
@@ -88,7 +97,7 @@ input[type=text],textarea{
       background: #eee; 
   }
   th { 
-      background: #4CAF50; 
+      background: blue; 
       color: white; 
       font-weight: bold; 
   }
@@ -99,7 +108,7 @@ input[type=text],textarea{
       font-size: 18px;
   }
   #btnEdit{
-    background-color: #4CAF50; /* Green */
+    background-color: rgb(4, 4, 252); /* Green */
     border: none;
     color: white;
     padding: 15px 32px;
@@ -110,7 +119,7 @@ input[type=text],textarea{
     border-radius: 8px;
   }
   #btnDelete{
-    background-color: #4CAF50; /* Green */
+    background-color: rgb(4, 4, 252); /* Green */
     border: none;
     color: white;
     padding: 15px 32px;
