@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Registration Form</h1>
+    <div class="fromcontainer">
+        <form action="" id="form" name="myForm">
+            <!-- fullname field -->
+        <div class="row">
+                <div class="col-25">
+                  <label for="fullname">Full Name :</label>
+                </div>
+            <div class="col-75">
+                <input type="text" id="fullname" name="fullname" placeholder="Your Fullname..." >
+                <small class="formerror"></small>
+            </div>
+        </div>
+            <!-- email field -->
+            <div class="row">
+                <div class="col-25">
+                    <label for="email">Email Id :</label>
+                </div>
+                <div class="col-75">
+                    <input type="email" id="email"name="email" placeholder="Your Email...">
+                    <small class="formerror"></small>
+                </div>
+            </div>
+            <!-- contact no field -->
+            <div class="row">
+                <div class="col-25">
+                    <label for="contact">Contact No:</label>
+                </div>
+                <div class="col-75">
+                    <input type="tel" id="contact"name="contact" placeholder="Your Contact No...">
+                    <small class="formerror"></small>
+                </div>
+            </div>
+            <!-- address field-->
+            <div class="row">
+                <div class="col-25">
+                    <label for="address">Address(optional) :</label>
+                </div>
+                <div class="col-75">
+                    <textarea name="address" id="address" cols="80" rows="5" placeholder="Your Address..."></textarea>
+                    <small class="formerror"></small>
+                </div>
+            </div>
+            <!-- password field-->
+            <div class="row">
+                <div class="col-25">
+                    <label for="address">Password :</label>
+                </div>
+                <div class="col-75">
+                    <input type="password" id="password"name="password" placeholder="Your Password...">
+                    <small class="formerror"></small>
+                </div>
+            </div>
+            <!-- submit button -->
+            <div class="row">
+                <button id="btnSubmit">Submit</button>
+                <button id="btnEdit" style="display: none;">Edit</button>
+            </div>
+        </form>
+        <div class="container text-center" style="margin-top: 50px;">
+            <table class="table table-bordered" id="datatable">
+                <thead>
+                    <th class="text-center">Fullname</th>
+                    <th class="text-center">Email</th>
+                    <th class="text-center">Contact</th>
+                    <th class="text-center">Address</th>
+                    <th class="text-center">Password</th>
+                    <th class="text-center"></th>
+                    <th class="text-center"></th>
+                </thead>   
+                <tbody></tbody>
+            </table>
+        </div>
+    <script src="script.js" ></script>
+</body>
+</html>
