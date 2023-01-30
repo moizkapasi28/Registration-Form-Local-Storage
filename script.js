@@ -6,28 +6,35 @@ const password = document.getElementById('password');
 const formerror = document.querySelectorAll('formerror');
 const btnSubmit = document.getElementById('btnSubmit');
 const btnEdit = document.getElementById('btnEdit');
-
-
 function validationForm() {
     let returnVal = true;
     if (fullname.value == "") {
-        document.getElementsByClassName('formerror')[0].innerHTML = "*Name is empty"
+        document.getElementsByClassName('formerror')[0].innerHTML = "*Name is empty";
         returnVal = false;
-    } else if (fullname.value.length < 5) {
-        document.getElementsByClassName('formerror')[0].innerHTML = "*Name is too Short"
+    }else if (fullname.value.length < 5) {
+        document.getElementsByClassName('formerror')[0].innerHTML = "*Name is too Short";
         returnVal = false;
+    }
+    else{
+        document.getElementsByClassName('formerror')[0].innerHTML = "";
     }
     if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)) {
-        document.getElementsByClassName('formerror')[1].innerHTML = "*Please Enter Valid Email"
+        document.getElementsByClassName('formerror')[1].innerHTML = "*Please Enter Valid Email";
         returnVal = false;
+    }else{
+        document.getElementsByClassName('formerror')[1].innerHTML = "";
     }
     if (!/^\+?[1-9][0-9]{7,14}$/.test(contact.value)) {
-        document.getElementsByClassName('formerror')[2].innerHTML = "*Please Enter Valid Contact Number"
+        document.getElementsByClassName('formerror')[2].innerHTML = "*Please Enter Valid Contact Number";
         returnVal = false;
+    }else{
+        document.getElementsByClassName('formerror')[2].innerHTML = "";
     }
     if (password.value.length < 8 || password.value.length > 15) {
         document.getElementsByClassName('formerror')[4].innerHTML = "*Please Enter Valid Password";
         returnVal = false;
+    }else{
+        document.getElementsByClassName('formerror')[4].innerHTML = "";
     }
     return returnVal
 }
@@ -54,9 +61,7 @@ function showData() {
     document.querySelector('#datatable tbody').innerHTML = html;
 }
 document.onload = showData();
-
 //function to add data
-
 let userStorage = localStorage.getItem('demo') ? JSON.parse(localStorage.getItem('demo')) : [];
 btnSubmit.addEventListener('click', (e) => {
     e.preventDefault();
@@ -105,7 +110,6 @@ function editData(id) {
     }
 
 }
-
 function updateRecord(id) {
     if (validationForm()) {
         var list;
@@ -149,5 +153,4 @@ function deleteData(id) {
     } else {
         return
     }
-
 }
