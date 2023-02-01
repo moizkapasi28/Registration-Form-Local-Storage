@@ -6,59 +6,72 @@ const password = document.getElementById('password');
 const formerror = document.querySelectorAll('formerror');
 const btnSubmit = document.getElementById('btnSubmit');
 const btnEdit = document.getElementById('btnEdit');
+
+function showPassword(){
+    if(password.type === "password"){
+        password.type = "text";
+    }else{
+        password.type = "password"
+    }
+}
 function validationForm() {
     let returnVal = true;
     if (fullname.value == "") {
         document.getElementsByClassName('formerror')[0].innerHTML = "*Name is empty";
         returnVal = false;
-    }else if (fullname.value.length < 5) {
+    } else if (fullname.value.length < 5) {
         document.getElementsByClassName('formerror')[0].innerHTML = "*Name is too Short";
         returnVal = false;
+    } 
+    else if(!/^[a-zA-Z]+[a-zA-Z]+$/.test(fullname.value)){
+        document.getElementsByClassName('formerror')[0].innerHTML = "*Please Enter Valid Name";
+        returnVal = false;
     }
-    else{
+     else {
         document.getElementsByClassName('formerror')[0].innerHTML = "";
     }
     if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)) {
         document.getElementsByClassName('formerror')[1].innerHTML = "*Please Enter Valid Email";
         returnVal = false;
-    }else{
+    } else {
         document.getElementsByClassName('formerror')[1].innerHTML = "";
     }
     if (!/^\+?[1-9][0-9]{7,14}$/.test(contact.value)) {
         document.getElementsByClassName('formerror')[2].innerHTML = "*Please Enter Valid Contact Number";
         returnVal = false;
-    }else{
+    } else {
         document.getElementsByClassName('formerror')[2].innerHTML = "";
     }
     if (password.value.length < 8 || password.value.length > 15) {
         document.getElementsByClassName('formerror')[4].innerHTML = "*Please Enter Valid Password";
         returnVal = false;
-    }else{
+    } else {
         document.getElementsByClassName('formerror')[4].innerHTML = "";
     }
     return returnVal
 }
 //functon to show data
-function showData() {
+function showData(list) {
     var list;
     if (localStorage.getItem("list") == null) {
         list = [];
     } else {
         list = JSON.parse(localStorage.getItem("list"));
     }
-    var html = "";
-    list.forEach(function (element, index) {
-        html += "<tr>";
-        html += "<td>" + element.fullname + "</td>"
-        html += "<td>" + element.email + "</td>"
-        html += "<td>" + element.contact + "</td>"
-        html += "<td>" + element.address + "</td>"
-        html += "<td>" + element.password + "</td>"
-        html += `<td><button id='btnEdit' onclick='editData(${element.id})'>Edit</button></td>`
-        html += `<td><button id='btnDelete' onclick='deleteData(${index})'>Delete</button></td>`
-        html += "</tr>"
-    });
-    document.querySelector('#datatable tbody').innerHTML = html;
+    let text = "<table style='border: 5px solid black;'>"
+    for (i = 0; i < list.length; i++) {
+        text += "<tr>";
+        text += "<td>" + list[i].fullname + "</td>";
+        text += "<td>" + list[i].email + "</td>";
+        text += "<td>" + list[i].contact + "</td>";
+        text += "<td>" + list[i].address + "</td>";
+        text += "<td>" + list[i].password + "</td>";
+        text += `<td><button id='btnEdit' onclick='editData(${list[i].id})'>Edit</button></td>`;
+        text += `<td><button id='btnEdit' onclick='deleteData(${i})'>Delete</button></td>`;
+        text += "</tr>";
+    }
+    text += "</table>"
+    document.getElementById('tbody').innerHTML = text
 }
 document.onload = showData();
 //function to add data
@@ -77,12 +90,12 @@ btnSubmit.addEventListener('click', (e) => {
             fullname: fullname.value,
             email: email.value,
             contact: contact.value,
-            address: address.value,
+            address: enCode(address.value),
             password: password.value,
         }
         list.push(user)
         localStorage.setItem("list", JSON.stringify(list));
-        showData();
+        showData(list);
         form.reset();
     }
 })
@@ -97,18 +110,16 @@ function editData(id) {
         list = JSON.parse(localStorage.getItem("list"));
     }
     let currentUser = list[id]
-    console.log(currentUser)
     document.getElementById('fullname').value = currentUser.fullname;
     document.getElementById('email').value = currentUser.email;
     document.getElementById('contact').value = currentUser.contact;
-    document.getElementById('address').value = currentUser.address;
+    document.getElementById('address').value = deCode(currentUser.address);
     document.getElementById('password').value = currentUser.password;
 
     btnEdit.onclick = (e) => {
         e.preventDefault();
         updateRecord(currentUser.id)
     }
-
 }
 function updateRecord(id) {
     if (validationForm()) {
@@ -122,13 +133,13 @@ function updateRecord(id) {
             fullname: fullname.value,
             email: email.value,
             contact: contact.value,
-            address: address.value,
+            address: enCode(address.value),
             password: password.value,
             id: id
         }
         list[id] = updateUser;
         localStorage.setItem("list", JSON.stringify(list));
-        showData();
+        showData(list);
         form.reset();
         btnSubmit.style.display = "block"
         btnEdit.style.display = "none"
@@ -153,4 +164,25 @@ function deleteData(id) {
     } else {
         return
     }
+}
+function enCode(text){
+    const entities ={
+        "<":"&lt;",
+        ">":"&gt;",
+        "/":"&#47;",
+        ":":"&#58;",
+        ".":"&#xb7;",
+    };
+    let arr = text.split("").map(function(elem){
+        if(entities.hasOwnProperty(elem)){
+            return entities[elem]; 
+        }else{
+            return elem;
+        }
+    });
+    return arr.join("") 
+}
+function deCode(text){
+    let txt = new DOMParser().parseFromString(text,"text/html");
+    return txt.documentElement.textContent;
 }
