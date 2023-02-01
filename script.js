@@ -7,13 +7,6 @@ const formerror = document.querySelectorAll('formerror');
 const btnSubmit = document.getElementById('btnSubmit');
 const btnEdit = document.getElementById('btnEdit');
 
-function showPassword(){
-    if(password.type === "password"){
-        password.type = "text";
-    }else{
-        password.type = "password"
-    }
-}
 function validationForm() {
     let returnVal = true;
     if (fullname.value == "") {
@@ -186,3 +179,11 @@ function deCode(text){
     let txt = new DOMParser().parseFromString(text,"text/html");
     return txt.documentElement.textContent;
 }
+function showPassword(){
+    if(password.type === "password"){
+        password.type = "text";
+    }else{
+        password.type = "password"
+    }
+}
+
