@@ -47,7 +47,7 @@
                     <label for="address">Address(optional) :</label>
                 </div>
                 <div class="col-75">
-                    <textarea name="address" id="address" cols="80" rows="5" placeholder="Your Address..."></textarea>
+                    <textarea type="text" name="address" id="address" cols="80" rows="5" placeholder="Your Address..."></textarea>
                     <small class="formerror"></small>
                 </div>
             </div>
@@ -58,6 +58,7 @@
                 </div>
                 <div class="col-75">
                     <input type="password" id="password"name="password" placeholder="Your Password...">
+                    <input type="checkbox" name="showpass" id="showpass" onclick="showPassword()">Show Password
                     <small class="formerror"></small>
                 </div>
             </div>
@@ -78,7 +79,7 @@
                     <th class="text-center"></th>
                     <th class="text-center"></th>
                 </thead>   
-                <tbody></tbody>
+                <tbody id="tbody"></tbody>
             </table>
         </div>
     <script src="script.js" ></script>
